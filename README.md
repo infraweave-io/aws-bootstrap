@@ -86,6 +86,12 @@ In this example we have `project1-dev`, `project1-prod` and `project2-dev` to de
 
 # Setting up
 
+Ensure you have an active sso-sesion: `aws sso login --profile sso-session`.
+
+First time you need to ensure pull-through-cache has been set up and populated before infrastructure is bootstrapped.
+
+There is a script prepared for this, modify it to your needs and run it `./setup_pull_through_cache.sh`
+
 Perform the bootstrapping by running
 
 ```tf
