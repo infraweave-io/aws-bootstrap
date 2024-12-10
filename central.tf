@@ -33,10 +33,16 @@ provider "aws" {
   alias   = "central-us-west-2"
   region  = "us-west-2"
   profile = "central" # This is the profile name in ~/.aws/config
+  default_tags {
+    tags = local.tags
+  }
 }
 
 provider "aws" {
   alias   = "central-eu-central-1"
   region  = "eu-central-1"
   profile = "central" # This is the profile name in ~/.aws/config
+  default_tags {
+    tags = local.tags
+  }
 }

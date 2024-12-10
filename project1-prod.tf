@@ -33,10 +33,16 @@ provider "aws" {
   alias   = "workload-project1-prod-us-west-2"
   region  = "us-west-2"
   profile = "project1-prod" # This is the profile name in ~/.aws/config
+  default_tags {
+    tags = local.tags
+  }
 }
 
 provider "aws" {
   alias   = "workload-project1-prod-eu-central-1"
   region  = "eu-central-1"
   profile = "project1-prod" # This is the profile name in ~/.aws/config
+  default_tags {
+    tags = local.tags
+  }
 }
