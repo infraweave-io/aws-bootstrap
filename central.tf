@@ -2,7 +2,7 @@
 // Central Account
 
 module "central-us-west-2" {
-  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-central.git?ref=v0.0.60"
+  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-central.git?ref=v0.0.69"
 
   region = "us-west-2"
   providers = {
@@ -13,13 +13,13 @@ module "central-us-west-2" {
   organization_id = local.organization_id
   central_account_id = local.central_account_id
 
-  enable_webhook_processor = true # Optional
-  enable_webhook_processor_endpoint = true # Optional
+  enable_webhook_processor = true
+  enable_webhook_processor_endpoint = true
 
-  enable_oidc_provider = true # Optional
-  allowed_github_repos = [ "some-org/example-repo" ] # Optional
+  oidc_allowed_github_repos = local.central_github_repos_oidc
   
-  project_map = local.project_map # Optional
+  all_regions = local.all_regions
+  all_workload_projects = local.all_workload_projects
 }
 
 output "webhook_endpoint_us_west_2" {
@@ -27,7 +27,7 @@ output "webhook_endpoint_us_west_2" {
 }
 
 module "central-eu-central-1" {
-  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-central.git?ref=v0.0.60"
+  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-central.git?ref=v0.0.69"
 
   region = "eu-central-1"
   providers = {
@@ -38,9 +38,11 @@ module "central-eu-central-1" {
   organization_id = local.organization_id
   central_account_id = local.central_account_id
 
-  enable_webhook_processor = true # Optional
+  enable_webhook_processor = true
 
-  project_map = local.project_map # Optional
+  all_regions = local.all_regions
+  all_workload_projects = local.all_workload_projects
+
 }
 
 // Regional providers

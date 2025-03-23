@@ -24,18 +24,6 @@ regio = us-east-1
 sso_session = aws-sso-session
 sso_role_name = AdministratorAccess
 
-[profile project1-prod]
-sso_account_id = 222222222222
-regio = us-east-1
-sso_session = aws-sso-session
-sso_role_name = AdministratorAccess
-
-[profile project2-dev]
-sso_account_id = 333333333333
-regio = us-east-1
-sso_session = aws-sso-session
-sso_role_name = AdministratorAccess
-
 [sso-session aws-sso-session]
 sso_start_url = https://d-1234567890.awsapps.com/start
 sso_region = us-east-1
@@ -79,7 +67,7 @@ Modify the file `central.tf`.
 
 ## Configure each workload account
 
-In this example we have `project1-dev`, `project1-prod` and `project2-dev` to demonstrate how it can be set up, each project has its own `.tf`-file.
+In this example we have `project1-dev` to demonstrate how it can be set up, each project has its own `.tf`-file.
 
 1. Set up one workload-module per region you want to support
 1. Configure a corresponding provider per region and name accordingly
@@ -90,7 +78,7 @@ Ensure you have an active sso-sesion: `aws sso login --profile sso-session`.
 
 First time you need to ensure pull-through-cache has been set up and populated before infrastructure is bootstrapped.
 
-There is a script prepared for this, modify it to your needs and run it `./setup_pull_through_cache.sh`
+There is a script prepared for this, modify it to your needs and run it `./update_pull_through_cache.sh`
 
 Perform the bootstrapping by running
 
@@ -100,3 +88,5 @@ terraform apply
 ```
 
 This will bootstrap the entire platform in all desired AWS accounts.
+
+*This needs to be done on upgrades as well*

@@ -9,17 +9,26 @@ locals {
     # Add more tags as needed
   }
 
-  project_map = jsonencode({
-    id = "project_map",
-    data = {
-      "some-org/infra-111111111111-us-west-2" = {
-          project_id = "111111111111"
-          region = "us-west-2"
-      },
-      "some-org/infra-111111111111-eu-central-1" = {
-          project_id = "111111111111"
-          region = "eu-central-1"
-      },
-    }
-  })
+  all_regions = ["us-west-2", "eu-central-1"]
+
+  central_github_repos_oidc = [
+    "some-org/module1", 
+    "some-org/module2"
+  ]
+
+  all_workload_projects = [
+      {
+        project_id = "111111111111"
+        name = "Developer Account"
+        description = "Developer Account for testing"
+        regions = ["us-west-2", "eu-central-1"]
+        github_repos_deploy = [
+          "some-org/infra-111111111111",
+        ]
+        github_repos_oidc = [ 
+          "some-org/module1", # Can be used for tests in this account
+          "some-org/module2", # Can be used for tests in this account
+        ]
+      }
+  ]
 }
