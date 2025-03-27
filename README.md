@@ -1,13 +1,13 @@
 
-# Getting started
+# Getting Started 🚀
 
-To get started, you need to bootstrap the AWS accounts to support InfraWeave.
+Welcome to InfraWeave! This guide will walk you through bootstrapping your AWS accounts to support the InfraWeave platform.
 
-## Set up AWS config
+## Set Up AWS Config 🔧
 
-Ensure you have set up profiles for all your accounts, here is an example:
+Before you begin, ensure you have configured profiles for all your AWS accounts. Below is an example configuration for your `~/.aws/config` file:
 
-```toml
+```ini
 # Filename: ~/.aws/config
 
 # ...
@@ -30,11 +30,9 @@ sso_region = us-east-1
 sso_registration_scopes = sso:account:access
 ```
 
-## Clone the repo
+## Clone the Repository 📥
 
-Clone the [aws-bootstrap](https://github.com/infraweave-io/aws-bootstrap-example) which is designed to make it easy to get started.
-
-It has the following structure:
+Clone the [aws-bootstrap](https://github.com/infraweave-io/aws-bootstrap-example), designed to simplify your setup process. The repository structure is as follows:
 
 ```
 .
@@ -42,51 +40,50 @@ It has the following structure:
 ├── README.md
 ├── central.tf
 ├── locals.tf
-├── project-1.tf
-└── project-2.tf
+└── project1-dev.tf
 ```
 
-# Configuration
+# Configuration ⚙️
 
-Before you bootstrap the control plane you need to configure it as you want.
+Before bootstrapping the control plane, configure it according to your environment’s requirements.
 
-## Configure settings
+## Configure Settings
 
-Here are following configurations in `locals.tf`:
+Within `locals.tf`, review and update the following configuration:
 * `environment`
 
-By default `environment` is set to "prod", but if you want to have multiple control-planes, this parameter can be used. This local variable is passed to each module. 
-In order to use multiple environments, either have a copy of this folder per environment, or modify the code to handle all environments in this folder.
+environment: By default, this is set to `"prod"`. If you need to support multiple control planes, adjust this parameter accordingly. You can either duplicate the folder for each environment or modify the code to manage multiple environments within the same directory.
 
-## Configure the central account
+## Configure the Central Account
 
-Modify the file `central.tf`.
+Edit the `central.tf` file to:
 
-1. Set up one central-module per region you want to support
-1. Configure a corresponding provider per region and name accordingly
+1. Set up one central module per supported region.
+1. Configure a corresponding provider for each region, naming them appropriately.
 
-## Configure each workload account
+## Configure each Workload Account
 
-In this example we have `project1-dev` to demonstrate how it can be set up, each project has its own `.tf`-file.
+For each project (e.g., `project1-dev`), a dedicated `.tf` file is provided. Within these files:
 
-1. Set up one workload-module per region you want to support
-1. Configure a corresponding provider per region and name accordingly
+1. Set up one workload module per supported region.
+1. Configure the corresponding provider for each region, with appropriate naming.
 
-# Setting up
+# Bootstrapping the Platform 🚀
 
-Ensure you have an active sso-sesion: `aws sso login --profile sso-session`.
+1. **SSO Login**: Ensure you have an active SSO session:
+```bash
+aws sso login --profile sso-session
+```
 
-First time you need to ensure pull-through-cache has been set up and populated before infrastructure is bootstrapped.
+2. **Initialize the Pull-Through Cache**: Before bootstrapping the infrastructure for the first time, set up and populate the pull-through cache. Modify and run the provided script:
+```bash
+./update_pull_through_cache.sh
+```
 
-There is a script prepared for this, modify it to your needs and run it `./update_pull_through_cache.sh`
-
-Perform the bootstrapping by running
-
-```tf
+3. **Run Terraform**: Execute the following commands to bootstrap your entire platform across all desired AWS accounts:
+```bash
 terraform init
 terraform apply
 ```
 
-This will bootstrap the entire platform in all desired AWS accounts.
-
-*This needs to be done on upgrades as well*
+*Note: Repeat these steps for upgrades as well.*
