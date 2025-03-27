@@ -32,7 +32,7 @@ sso_registration_scopes = sso:account:access
 
 ## Clone the Repository 📥
 
-Clone the [aws-bootstrap](https://github.com/infraweave-io/aws-bootstrap-example), designed to simplify your setup process. The repository structure is as follows:
+Clone [this](https://github.com/infraweave-io/aws-bootstrap), designed to simplify your setup process. The repository structure is as follows:
 
 ```
 .
