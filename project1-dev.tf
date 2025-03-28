@@ -11,13 +11,12 @@ module "workload-project1-dev-us-west-2" {
 
   environment        = local.environment
   central_account_id = local.central_account_id
-  organization_id = local.organization_id
 
   all_workload_projects = local.all_workload_projects # Only to be set in the primary region of the workload account
 }
 
 module "workload-project1-dev-eu-central-1" {
-  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.72"
+  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.73"
 
   region = "eu-central-1"
   providers = {
@@ -26,7 +25,6 @@ module "workload-project1-dev-eu-central-1" {
 
   environment        = local.environment
   central_account_id = local.central_account_id
-  organization_id = local.organization_id
 }
 
 // Regional providers
