@@ -7,7 +7,7 @@ regions=("eu-central-1" "us-west-2")
 
 # ============ No need to modify below this line ============
 
-version="v0.0.72"
+version="v0.0.73"
 
 images=("infraweave/gitops-aws:$version-arm64" "infraweave/runner:$version-arm64" "infraweave/reconciler-aws:$version-arm64")
 ecr_repository_prefix="infraweave-ecr-public"

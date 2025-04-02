@@ -2,7 +2,7 @@
 // Workload Account Project 1 (dev)
 
 module "workload-project1-dev-us-west-2" {
-  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.72"
+  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.73"
 
   region = "us-west-2"
   providers = {
