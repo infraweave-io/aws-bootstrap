@@ -7,7 +7,7 @@ regions=("eu-central-1" "us-west-2")
 
 # ============ No need to modify below this line ============
 
-version="v0.0.73"
+version="v0.0.76"
 
 images=("infraweave/gitops-aws:$version-arm64" "infraweave/runner:$version-arm64" "infraweave/reconciler-aws:$version-arm64")
 ecr_repository_prefix="infraweave-ecr-public"
@@ -67,6 +67,16 @@ for region in "${regions[@]}"; do
              "aws:PrincipalOrgID": "$org_id"
          }
       }
+    },
+    {
+      "Sid": "AllowECRPull",
+      "Effect": "Allow",
+      "Principal": "ecr.amazonaws.com",
+      "Action": [
+         "ecr:BatchGetImage",
+         "ecr:GetDownloadUrlForLayer",
+         "ecr:BatchCheckLayerAvailability"
+      ]
     }
   ]
 }
