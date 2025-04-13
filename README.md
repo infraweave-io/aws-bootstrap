@@ -40,7 +40,8 @@ Clone [this](https://github.com/infraweave-io/aws-bootstrap), designed to simpli
 ├── README.md
 ├── central.tf
 ├── locals.tf
-└── project1-dev.tf
+├── project1-dev.tf
+└── update_pull_through_cache.sh
 ```
 
 # Configuration ⚙️
