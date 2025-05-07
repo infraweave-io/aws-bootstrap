@@ -14,13 +14,13 @@ Before you begin, ensure you have configured profiles for all your AWS accounts.
 
 [profile central]
 sso_account_id = 000000000000
-regio = us-east-1
+region = us-east-1
 sso_session = aws-sso-session
 sso_role_name = AdministratorAccess
 
 [profile project1-dev]
 sso_account_id = 111111111111
-regio = us-east-1
+region = us-east-1
 sso_session = aws-sso-session
 sso_role_name = AdministratorAccess
 
