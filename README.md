@@ -73,7 +73,7 @@ For each project (e.g., `project1-dev`), a dedicated `.tf` file is provided. Wit
 
 1. **SSO Login**: Ensure you have an active SSO session:
 ```bash
-aws sso login --profile sso-session
+aws sso login --sso-session aws-sso-session
 ```
 
 2. **Initialize the Pull-Through Cache**: Before bootstrapping the infrastructure for the first time, set up and populate the pull-through cache. Modify and run the provided script:
