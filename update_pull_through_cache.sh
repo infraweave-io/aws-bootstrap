@@ -5,9 +5,9 @@
 aws_profile_central="central"
 regions=("eu-central-1" "us-west-2")
 
-# ============ No need to modify below this line ============
+version="v0.0.84" # This is the version of the images you want to pull. Update this to match the terraform module version
 
-version="v0.0.84"
+# ============ No need to modify below this line ============
 
 images=("infraweave/gitops-aws:$version-arm64" "infraweave/runner:$version-arm64" "infraweave/reconciler-aws:$version-arm64")
 ecr_repository_prefix="infraweave-ecr-public"
@@ -69,9 +69,11 @@ for region in "${regions[@]}"; do
       }
     },
     {
-      "Sid": "AllowECRPull",
+      "Sid": "AllowLambdaPull",
       "Effect": "Allow",
-      "Principal": "ecr.amazonaws.com",
+      "Principal": {
+        "Service": "lambda.amazonaws.com",
+      }
       "Action": [
          "ecr:BatchGetImage",
          "ecr:GetDownloadUrlForLayer",
