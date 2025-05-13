@@ -5,7 +5,7 @@
 aws_profile_central="central"
 regions=("eu-central-1" "us-west-2")
 
-version="v0.0.84" # This is the version of the images you want to pull. Update this to match the terraform module version
+version="v0.0.85" # This is the version of the images you want to pull. Update this to match the terraform module version
 
 # ============ No need to modify below this line ============
 
