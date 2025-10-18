@@ -1,46 +1,39 @@
 
 // Workload Account Project 1 (dev)
 
-module "workload-project1-dev-us-west-2" {
-  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.85"
+module "workload-project1-dev" {
+  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.91"
 
-  region = "us-west-2"
+  for_each = toset(local.all_regions)
+
+  region = each.value
+
   providers = {
-    aws = aws.workload-project1-dev-us-west-2
+    aws = aws.workload-project1-dev
   }
 
   environment        = local.environment
   central_account_id = local.central_account_id
 
-  all_workload_projects = local.all_workload_projects # Only to be set in the primary region of the workload account
+  # Only pass all_workload_projects in the primary region
+  all_workload_projects = each.value == local.primary_region ? local.all_workload_projects : []
 }
 
-module "workload-project1-dev-eu-central-1" {
-  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.85"
-
-  region = "eu-central-1"
-  providers = {
-    aws = aws.workload-project1-dev-eu-central-1
-  }
-
-  environment        = local.environment
-  central_account_id = local.central_account_id
+// moved blocks for state migration
+moved {
+  from = module.workload-project1-dev-us-west-2
+  to   = module.workload-project1-dev["us-west-2"]
 }
 
-// Regional providers
+moved {
+  from = module.workload-project1-dev-eu-central-1
+  to   = module.workload-project1-dev["eu-central-1"]
+}
+
+// Regional provider (single provider with regions set on resources)
 
 provider "aws" {
-  alias   = "workload-project1-dev-us-west-2"
-  region  = "us-west-2"
-  profile = "project1-dev" # This is the profile name in ~/.aws/config
-  default_tags {
-    tags = local.tags
-  }
-}
-
-provider "aws" {
-  alias   = "workload-project1-dev-eu-central-1"
-  region  = "eu-central-1"
+  alias   = "workload-project1-dev"
   profile = "project1-dev" # This is the profile name in ~/.aws/config
   default_tags {
     tags = local.tags

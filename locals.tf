@@ -2,6 +2,7 @@
 locals {
   environment        = "prod"
   central_account_id = "000000000000"
+  primary_region     = "us-west-2" # Primary region for global resources (IAM, OIDC, etc.)
   tags = {
     Environment = local.environment
     Application = "InfraWeave"
