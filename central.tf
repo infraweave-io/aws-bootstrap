@@ -2,7 +2,7 @@
 // Central Account
 
 module "central" {
-  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-central.git?ref=v0.0.91"
+  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-central.git?ref=v0.0.91-patch+single-role"
 
   for_each = toset(local.all_regions)
 
@@ -25,6 +25,7 @@ module "central" {
   
   all_regions = local.all_regions
   all_workload_projects = local.all_workload_projects
+  is_primary_region = each.value == local.primary_region
 }
 
 output "webhook_endpoints" {

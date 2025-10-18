@@ -2,7 +2,7 @@
 // Workload Account Project 1 (dev)
 
 module "workload-project1-dev" {
-  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.91"
+  source = "git::https://github.com/infraweave-io/terraform-aws-infraweave-workload.git?ref=v0.0.91-patch+single-role"
 
   for_each = toset(local.all_regions)
 
@@ -17,6 +17,7 @@ module "workload-project1-dev" {
 
   # Only pass all_workload_projects in the primary region
   all_workload_projects = each.value == local.primary_region ? local.all_workload_projects : []
+  is_primary_region = each.value == local.primary_region
 }
 
 // moved blocks for state migration
