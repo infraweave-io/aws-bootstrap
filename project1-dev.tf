@@ -17,7 +17,11 @@ module "workload-project1-dev" {
 
   # Only pass all_workload_projects in the primary region
   all_workload_projects = each.value == local.primary_region ? local.all_workload_projects : []
-  is_primary_region = each.value == local.primary_region
+  is_primary_region     = each.value == local.primary_region
+
+  # CloudWatch Observability — per-region link to the same-region central sink
+  enable_observability           = true
+  central_observability_sink_arn = module.central[each.value].observability_sink_arn : ""
 }
 
 // moved blocks for state migration
