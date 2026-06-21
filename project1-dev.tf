@@ -21,7 +21,9 @@ module "workload-project1-dev" {
 
   # CloudWatch Observability — per-region link to the same-region central sink
   enable_observability           = true
-  central_observability_sink_arn = module.central[each.value].observability_sink_arn : ""
+  central_observability_sink_arn = module.central[each.value].observability_sink_arn
+
+  central_output = module.central[each.value].central_output
 }
 
 // moved blocks for state migration

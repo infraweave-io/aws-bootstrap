@@ -11,6 +11,10 @@ locals {
 
   all_regions = ["us-west-2", "eu-central-1"]
 
+  cors_allow_origins = [
+    "http://localhost:3000",
+  ]
+
   central_github_repos_oidc = [
     "some-org/module1", 
     "some-org/module2"
@@ -31,4 +35,6 @@ locals {
         ]
       }
   ]
+
+  publish_auth_rego_policy = file("${path.module}/publish_auth.rego")
 }
