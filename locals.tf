@@ -3,6 +3,11 @@ locals {
   environment        = "prod"
   central_account_id = "000000000000"
   primary_region     = "us-west-2" # Primary region for global resources (IAM, OIDC, etc.)
+  
+  telemetry_exporter = "xray"
+  enable_transaction_search              = true
+  transaction_search_indexing_percentage = 100
+
   tags = {
     Environment = local.environment
     Application = "InfraWeave"
@@ -37,4 +42,11 @@ locals {
   ]
 
   publish_auth_rego_policy = file("${path.module}/publish_auth.rego")
+
+  enable_service_level_objectives = true
+  slo_availability_attainment     = 99
+  slo_availability_warning        = 99.5
+  slo_latency_threshold_ms = 500
+  telemetry_environment_central = "central-${local.environment}"
+
 }

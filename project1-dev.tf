@@ -15,6 +15,16 @@ module "workload-project1-dev" {
   environment        = local.environment
   central_account_id = local.central_account_id
 
+  telemetry_exporter = local.telemetry_exporter
+  enable_transaction_search              = local.enable_transaction_search
+  transaction_search_indexing_percentage = local.transaction_search_indexing_percentage
+  reconciler_telemetry_exporter = local.telemetry_exporter
+  runner_telemetry_exporter     = local.telemetry_exporter
+  telemetry_environment           = "project1-dev"
+  enable_service_level_objectives = local.enable_service_level_objectives
+  slo_availability_attainment     = local.slo_availability_attainment
+  slo_availability_warning        = local.slo_availability_warning
+
   # Only pass all_workload_projects in the primary region
   all_workload_projects = each.value == local.primary_region ? local.all_workload_projects : []
   is_primary_region     = each.value == local.primary_region
